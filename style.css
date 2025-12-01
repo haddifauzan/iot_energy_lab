@@ -1,0 +1,244 @@
+.device-icon {
+    transition: all 0.3s ease;
+}
+
+.light-on {
+    filter: drop-shadow(0 0 20px #fbbf24);
+    animation: glow 1.5s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% { filter: drop-shadow(0 0 20px #fbbf24); }
+    50% { filter: drop-shadow(0 0 30px #fbbf24); }
+}
+
+.ac-active {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+.tv-on {
+    animation: tvGlow 2s ease-in-out infinite;
+}
+
+@keyframes tvGlow {
+    0%, 100% { filter: drop-shadow(0 0 15px #60a5fa); }
+    50% { filter: drop-shadow(0 0 25px #60a5fa); }
+}
+
+.heater-on {
+    animation: heatPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes heatPulse {
+    0%, 100% { filter: drop-shadow(0 0 15px #f87171); }
+    50% { filter: drop-shadow(0 0 25px #f87171); }
+}
+
+.fan-on {
+    animation: fanSpin 3s linear infinite;
+}
+
+@keyframes fanSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.fridge-on {
+    filter: drop-shadow(0 0 10px #22d3ee);
+}
+
+.toggle-switch {
+    position: relative;
+    width: 160px;
+    height: 40px;
+    background: #ef4444;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.toggle-switch.smart {
+    background: #10b981;
+}
+
+.toggle-slider {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 32px;
+    height: 32px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.toggle-switch.smart .toggle-slider {
+    transform: translateX(120px);
+}
+
+.room-area {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    border: 3px solid #4b5563;
+    position: relative;
+    transition: all 0.5s;
+}
+
+.room-area.smart-mode {
+    border-color: #10b981;
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
+}
+
+.room-area.manual-mode {
+    border-color: #ef4444;
+    box-shadow: 0 0 30px rgba(239, 68, 68, 0.3);
+}
+
+.room-area.night {
+    background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+}
+
+.room-area.day {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+}
+
+.room-area.evening {
+    background: linear-gradient(135deg, #451a03 0%, #292524 100%);
+}
+
+.floor-tile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 15px;
+    background: repeating-linear-gradient(
+        90deg,
+        #374151 0px,
+        #374151 40px,
+        #4b5563 40px,
+        #4b5563 80px
+    );
+    border-top: 2px solid #6b7280;
+}
+
+.device-card {
+    background: rgba(31, 41, 55, 0.9);
+    backdrop-filter: blur(10px);
+    border: 2px solid #4b5563;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.device-card:hover {
+    transform: translateY(-3px);
+    border-color: #60a5fa;
+    box-shadow: 0 5px 20px rgba(96, 165, 250, 0.3);
+}
+
+.device-card.active {
+    border-color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.device-card.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.temperature-display {
+    font-family: 'Courier New', monospace;
+    background: #1f2937;
+    border: 2px solid #4b5563;
+    padding: 6px 12px;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+.time-slider {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: linear-gradient(to right, 
+        #1e3a8a 0%, 
+        #fbbf24 25%, 
+        #60a5fa 50%, 
+        #f97316 75%, 
+        #1e3a8a 100%);
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.time-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.time-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.schedule-item {
+    background: #1f2937;
+    border: 1px solid #374151;
+    padding: 8px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+}
+
+.schedule-item.active {
+    border-color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.power-bar {
+    height: 6px;
+    background: #1f2937;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 3px;
+}
+
+.power-bar-fill {
+    height: 100%;
+    transition: width 0.3s;
+}
+
+.sun-icon {
+    font-size: 3rem;
+    position: absolute;
+    top: 20px;
+    transition: all 0.5s;
+}
+
+.moon-icon {
+    font-size: 2.5rem;
+    position: absolute;
+    top: 20px;
+    transition: all 0.5s;
+    opacity: 0;
+}
+
+@media (max-width: 768px) {
+    .device-card {
+        padding: 8px !important;
+    }
+    .device-icon {
+        font-size: 2rem !important;
+    }
+}

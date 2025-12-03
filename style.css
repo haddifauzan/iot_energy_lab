@@ -242,3 +242,17 @@
         font-size: 2rem !important;
     }
 }
+
+.scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+}
+.scrollbar-thumb-gray-600::-webkit-scrollbar-thumb {
+    background-color: #4b5563;
+    border-radius: 4px;
+}
+.scrollbar-thumb-gray-600::-webkit-scrollbar-thumb:hover {
+    background-color: #6b7280;
+}
+.scrollbar-track-gray-800::-webkit-scrollbar-track {
+    background-color: #1f2937;
+}

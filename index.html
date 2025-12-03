@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-gray-950 text-white min-h-screen p-2 sm:p-4">
-    <header class="text-center mb-4 sm:mb-6">
+    <header class="text-center mb-4 sm:mb-6 relative"> 
         <h1 class="text-2xl sm:text-4xl font-bold mb-2 bg-gradient-to-r from-blue-400 via-green-400 to-purple-400 bg-clip-text text-transparent">
             IoT Energy Saver Lab
         </h1>
@@ -192,9 +192,14 @@
                             <p class="text-xs text-gray-400">Waktu Simulasi</p>
                             <p id="simulation-time" class="text-lg sm:text-xl font-bold">0 detik</p>
                         </div>
-                        <button id="reset-simulation" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs font-semibold transition">
-                            🔄 Reset
-                        </button>
+                        <div class="flex space-x-2">
+                            <button id="toggle-sim-control" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-xs font-semibold transition">
+                                ▶ Mulai
+                            </button>
+                            <button id="reset-simulation" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs font-semibold transition">
+                                🔄 Reset
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -253,6 +258,109 @@
             </div>
         </div>
     </div>
+
+    <div id="guide-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden">
+        <div class="bg-gray-800 rounded-xl max-w-lg w-11/12 mx-4 p-6 shadow-2xl relative border-t-4 border-blue-500">
+            <h2 class="text-2xl font-bold text-blue-400 mb-3 flex items-center">
+                📘 Cara Menggunakan Simulator
+            </h2>
+            
+            <p class="text-gray-300 text-sm mb-4">
+                Simulator ini menunjukkan perbandingan konsumsi energi antara **Kontrol Manual** (boros) dan **Mode Smart** (hemat) dalam jangka waktu yang sama.
+            </p>
+            
+            <div class="space-y-3 text-sm">
+                <h3 class="font-semibold text-white border-b border-gray-700 pb-1">Langkah Perbandingan:</h3>
+                
+                <div class="flex items-start">
+                    <span class="mr-3 text-lg font-bold text-yellow-400">1.</span>
+                    <p>
+                        Tekan tombol **<span class="text-orange-400">▶ Mulai Hitung</span>** di Dashboard untuk mengaktifkan perhitungan waktu.
+                    </p>
+                </div>
+                
+                <div class="flex items-start">
+                    <span class="mr-3 text-lg font-bold text-yellow-400">2.</span>
+                    <p>
+                        Pilih **<span class="text-red-400">Mode Manual</span>** (tombol *toggle* di kiri). Gunakan fitur kontrol perangkat (klik icon) dan atur slider waktu sesuai skenario konsumsi boros Anda. Biarkan berjalan selama beberapa detik/menit.
+                    </p>
+                </div>
+                
+                <div class="flex items-start">
+                    <span class="mr-3 text-lg font-bold text-yellow-400">3.</span>
+                    <p>
+                        Tekan **<span class="text-orange-400">⏸ Jeda Hitung</span>**. Kemudian, alihkan ke **<span class="text-green-400">Mode Smart</span>**.
+                    </p>
+                </div>
+                
+                <div class="flex items-start">
+                    <span class="mr-3 text-lg font-bold text-yellow-400">4.</span>
+                    <p>
+                        Tekan **<span class="text-orange-400">▶ Lanjutkan Hitung</span>** lagi. Biarkan berjalan dalam durasi yang sama atau lebih.
+                    </p>
+                </div>
+                
+                <div class="flex items-start">
+                    <span class="mr-3 text-lg font-bold text-yellow-400">5.</span>
+                    <p>
+                        Lihat hasil perbandingan di Dashboard: **Konsumsi Manual** vs **Konsumsi Smart** dan persentase **Penghematan Energi**.
+                    </p>
+                </div>
+            </div>
+            
+            <button id="close-guide-modal" class="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-lg transition shadow-md">
+                Mengerti, Mari Mulai!
+            </button>
+            <button id="open-info-modal-from-guide" class="mt-2 w-full text-xs text-blue-400 hover:text-blue-300 font-semibold transition">
+                Baca Tentang Web Ini Selengkapnya ➡️
+            </button>
+        </div>
+    </div>
+
+    <div id="info-modal" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-[60] hidden">
+        <div class="bg-gray-800 rounded-xl max-w-2xl w-11/12 mx-4 p-6 shadow-2xl relative border-t-4 border-green-500 max-h-[90vh] overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+            <h2 class="text-2xl font-bold text-green-400 mb-4 border-b border-gray-700 pb-2">
+                🔬 Detail Simulasi IoT Energy Saver Lab
+            </h2>
+            
+            <p class="text-gray-300 text-sm mb-4">
+                Ini adalah informasi teknis tentang asumsi daya yang digunakan, logika automasi, dan cara kerja sensor suhu.
+            </p>
+
+            <h3 class="text-lg font-semibold text-white mt-4 mb-2">1. Nilai Daya Perangkat (Watt)</h3>
+            <p class="text-xs text-gray-400 mb-2">Angka ini digunakan untuk menghitung konsumsi riil dan potensi penghematan.</p>
+            <table class="w-full text-sm text-left text-gray-400 rounded-lg overflow-hidden">
+                <thead class="text-xs text-gray-100 uppercase bg-gray-700">
+                    <tr>
+                        <th scope="col" class="px-3 py-2">Perangkat</th>
+                        <th scope="col" class="px-3 py-2 text-center">Manual (W)</th>
+                        <th scope="col" class="px-3 py-2 text-center">Smart (W)</th>
+                        <th scope="col" class="px-3 py-2 text-center">Potensi Hemat</th>
+                    </tr>
+                </thead>
+                <tbody id="device-power-table">
+                    </tbody>
+            </table>
+
+            <h3 class="text-lg font-semibold text-white mt-6 mb-2">2. Logika Kontrol Suhu Smart</h3>
+            <ul class="list-disc list-inside text-sm text-gray-300 ml-2 space-y-1">
+                <li>Suhu Tinggi (> 28°C): AC dan Kipas akan ON. AC menggunakan mode Efisien (24°C).</li>
+                <li>Suhu Normal (26°C - 28°C): AC akan OFF, Kipas akan ON (jika antara jam 09:00 - 22:00) untuk pendinginan ringan.</li>
+                <li>Suhu Rendah (< 20°C): Heater akan ON (Hanya pada jam 07:00 - 08:00 pagi).</li>
+            </ul>
+
+            <h3 class="text-lg font-semibold text-white mt-6 mb-2">3. Jadwal Otomatisasi (Smart Schedule)</h3>
+            <div id="smart-schedule-info" class="space-y-2 text-sm bg-gray-700 p-3 rounded-lg">
+                </div>
+
+            <button id="close-info-modal" class="mt-6 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded-lg transition shadow-md">
+                Tutup
+            </button>
+        </div>
+    </div>
+    <button id="open-guide-modal" aria-label="Buka Panduan" class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white px-4 py-2 rounded-full text-xs sm:text-sm font-bold">
+        ❓ Panduan
+    </button>
     <script src="script.js"></script>
 </body>
 </html>
